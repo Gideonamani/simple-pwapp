@@ -1,6 +1,10 @@
 
+// Dom object variables
 var canvas;
+var xSpeedInput;
+var ySpeedInput;
 
+// Ball object
 var ball = {
 	x:40,
 	y:40,
@@ -16,22 +20,51 @@ var ball = {
 
 }
 
-
+// Action during the canvas initializations
 function  setup (){
 	canvas = createCanvas(windowWidth, windowHeight);
-	background(0);
-
 	canvas.position(0, 0);
 	canvas.style('z-index', '-1');
+	// background(0);
+
+	// input DOM elements
+	xSpeedInput = createSlider(-24, 24, 5, 0.5);
+	xSpeedInput.style('width', '100px');
+	xSpeedInput.parent('#left-side');
+
+	ySpeedInput = createSlider(-30, 30, 8, 0.5);
+	ySpeedInput.style('width', '100px');
+	ySpeedInput.parent('#right-side');
+
+	bw = createSlider(0, 255, 100);
+	bw.style('width', '100px');
+	bw.parent('#center');
+
+
+	// Event listener to update the ball speed when the input values
+	// have been upadates
+	xSpeedInput.changed(function(){
+		console.log("this XX has been changed");
+		ball.xspeed = xSpeedInput.value();
+
+	});
+	ySpeedInput.changed(function(){
+		console.log("the YYYYY has been changed");
+		ball.yspeed = ySpeedInput.value();
+
+	});	
 }
 
+// Actions that repeat over and over again
 function draw() {
-	background(200);
+	background(bw.value());
 
 	fill(ball.rcol, ball.gcol, ball.bcol);
 
-	ball.x += ball.xspeed;
-	ball.y += ball.yspeed;
+	// ball.yspeed = ySpeedInput.value();
+
+	ball.x += ball.xspeed
+	ball.y += ball.yspeed
 
 	ellipse(ball.x, ball.y, ball.r, ball.r);
 
