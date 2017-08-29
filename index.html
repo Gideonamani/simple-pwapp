@@ -6,25 +6,107 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title></title>
+    <title> Implementing some basic PWA Concepts </title>
 
 
-	<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
-	<style type="text/css">
-		.partition p {
-			text-align: center;
-		}
-		.partition input[type="range"] {
-			margin: 0 auto;
-		}
-	</style>
+    <style>
+      :root {
+        --dark-primary-color:       #0288D1;
+        --default-primary-color:    #03A9F4;
+        --light-primary-color:      #B3E5FC;
+        --text-primary-color:       #FFFFFF;
+        --accent-color:             #607D8B;
+        --primary-background-color: #B3E5FC;
+        --primary-text-color:       #212121;
+        --secondary-text-color:     #757575;
+        --disabled-text-color:      #BDBDBD;
+        --divider-color:            #BDBDBD;
+        --light-box-shadow: rgba(240, 248, 255, 0.48) 0px 1px 4px 0px;
+        --medium-box-shadow: rgba(40, 48, 55, 0.1) 0px 1px 4px 0px;
+        --dark-box-shadow: rgba(40, 48, 55, 0.48) 0px 1px 4px 0px;
+      }
+      * {
+      	margin: 0;
+      	padding: 0;
+      	border: 0;
+      	box-sizing: border-box;
+      	/*font-family: sans-serif;*/
+      	color: var(--primary-text-color);
+      }
+      .toolbar {
+      	height: 4%;
+      	max-height: 64px;
+      	min-height: 48px;
+      	padding: 0 8px;
+      	background-color: var(--default-primary-color); 
+      }
+      .toolbar, .toolbar > div {
+      	display: flex;
+      	justify-content: space-between;
+      	align-items: center;    	
+      }
+      .toolbar .tb-icons {
+		    height: 36px;
+		    border-radius: 4px;
+		    box-shadow: var(--light-box-shadow);
+      }
+      .tb-icons.left {
+      	margin-right: 8px;
+      }
+      .tb-icons.right {
+      	margin-left: 8px;
+      }
+      .container {
+      	max-width: 960px;
+      	margin: 0 auto;
+      	padding: 8px;
+      }
+      .news-card {
+      	/*border: solid yellow 1px;*/
+      	border-radius: 4px;
+      	padding: 4px 0 8px;;
+      	box-shadow: var(--medium-box-shadow);
+      	margin-bottom: 16px;
+      }
+      .news-card-title {
+	    margin: 0 2px;
+	    color: var(--secondary-text-color);
+	    font-size: 2.4em;
+      }
+      .news-card-img {
+      	width: 100%;
+      	height: auto;
+      }
+      .news-card-p {
+	    margin: 0 2px;
+	    font-size: 1.2em;
+      }
+      .j-left {
+      	display: flex;
+      	flex-direction: row;
+      	justify-content: flex-end;
+      }
+      .more-dets p, .more-dets p a {
+      	margin-right: 8px;
+      	text-decoration: none;
+      	color: var(--accent-color);
+      }
+      .more-dets p:hover {
+      	text-decoration: underline;
+      }
+    </style>
 </head>
 
 <body>
-	<header>
-		
-	</header>
-
+	<div class="toolbar">
+		<div>
+			<img class="tb-icons left" src="images/icons/home.png">
+			<h1> Sports News </h1>
+		</div>
+		<div>
+			<img class="tb-icons left" src="images/icons/home.png">
+		</div>
+	</div>
 	<div class="container">
 		<h1>Mabina na mabina na mabinaaaa!!! </h1>
 		<p>
@@ -42,11 +124,28 @@
 			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 		</p>
-		</div>
 
+		<div class="news-card">
+			<h3 class="news-card-title">Five or six can win title</h3>
+			<img class="news-card-img" src="http://e2.365dm.com/17/08/16-9/30/skysports-nemanja-matic-premier-league-swansea-city-manchester-united_4078997.jpg?20170821002410">
+			<p class="news-card-p">Nemanja Matic says as many as "five or six clubs" are in with a chance of winning the Premier League title this season.</p>
+			<div class="more-dets j-left">
+				<p> <a href="#">More details ... </a> </p>
+			</div>
+		</div>
 	</div>
 
-
+	<template id="news-template">
+		<div class="news-card">
+			<h3 class="news-card-title">Five or six can win title</h3>
+			<img class="news-card-img" src="http://e2.365dm.com/17/08/16-9/30/skysports-nemanja-matic-premier-league-swansea-city-manchester-united_4078997.jpg?20170821002410">
+			<p class="news-card-p">Nemanja Matic says as many as "five or six clubs" are in with a chance of winning the Premier League title this season.</p>
+			<div class="more-dets j-left">
+				<p> <a href="#">More details ... </a> </p>
+			</div>
+		</div>
+	</template>
+	<script type="text/javascript" src="functions.js"></script>
 </body>
 
 </html>
