@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Implementing some basic PWA Concepts </title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="images/icons/icon.png">
+	<link rel="manifest" href="manifest.json" />
+
+
+    <style>
+      :root {
+        --dark-primary-color:       #0288D1;
+        --default-primary-color:    #03A9F4;
+        --light-primary-color:      #B3E5FC;
+        --text-primary-color:       #FFFFFF;
+        --accent-color:             #607D8B;
+        --primary-background-color: #B3E5FC;
+        --primary-text-color:       #212121;
+        --secondary-text-color:     #757575;
+        --disabled-text-color:      #BDBDBD;
+        --divider-color:            #BDBDBD;
+        --light-box-shadow: rgba(240, 248, 255, 0.48) 0px 1px 4px 0px;
+        --medium-box-shadow: rgba(40, 48, 55, 0.1) 0px 1px 4px 0px;
+        --dark-box-shadow: rgba(40, 48, 55, 0.48) 0px 1px 4px 0px;
+      }
+      * {
+      	margin: 0;
+      	padding: 0;
+      	border: 0;
+      	box-sizing: border-box;
+      	/*font-family: sans-serif;*/
+      	color: var(--primary-text-color);
+      }
+      .toolbar {
+      	height: 4%;
+      	max-height: 64px;
+      	min-height: 48px;
+      	padding: 0 8px;
+      	background-color: var(--default-primary-color); 
+      }
+      .toolbar, .toolbar > div {
+      	display: flex;
+      	justify-content: space-between;
+      	align-items: center;    	
+      }
+      .toolbar .tb-icons {
+		    height: 36px;
+		    border-radius: 4px;
+		    box-shadow: var(--light-box-shadow);
+      }
+      .tb-icons.left {
+      	margin-right: 8px;
+      }
+      .tb-icons.right {
+      	margin-left: 8px;
+      }
+      .container {
+      	max-width: 960px;
+      	margin: 0 auto;
+      	padding: 8px;
+      }
+      .container.gray {
+        background: #faffcc;
+        display: none;
+      }
+      .news-card {
+      	/*border: solid yellow 1px;*/
+      	border-radius: 4px;
+      	padding: 4px 0 8px;;
+      	box-shadow: var(--medium-box-shadow);
+      	margin-bottom: 16px;
+      }
+      .news-card-title {
+  	    margin: 0 2px;
+  	    color: var(--secondary-text-color);
+  	    font-size: 2.4em;
+      }
+      .news-card-img {
+      	width: 100%;
+      	height: auto;
+      }
+      .news-card-p {
+  	    margin: 0 2px;
+  	    font-size: 1.2em;
+      }
+      .j-left {
+      	display: flex;
+      	flex-direction: row;
+      	justify-content: flex-end;
+      }
+      .more-dets p, .more-dets p a {
+      	margin-right: 8px;
+      	text-decoration: none;
+      	color: var(--accent-color);
+      }
+      .more-dets p:hover {
+      	text-decoration: underline;
+      }
+      .news-card-head {
+        display: flex;
+        margin: 0 2px;
+      }
+      .news-card-avatar {
+
+      } 
+      .news-card-avatar-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      .news-card-head-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 8px;
+      }
+      .news-card-username {
+        color:var(--primary-text-color);
+      }
+      .news-card-news-date {
+        color: #757575;
+        font-weight: 400;
+
+      }
+      .news-card-time-elapsed {
+        color: lightgray;
+      }
+    </style>
+</head>
+
+<body>
+	<div class="toolbar">
+		<div>
+			<img class="tb-icons left" src="images/icons/home.png">
+			<h1> Sports News </h1>
+		</div>
+		<div>
+			<a href="settings.html"><img class="tb-icons left" src="images/icons/settings.png"></a>
+		</div>
+	</div>
+	<div class="container">
+
+		<div class="news-card">
+      <div class="news-card-head">
+        <div class="news-card-avatar">
+          <img class="news-card-avatar-img" src="https://pp.userapi.com/c625322/v625322763/4ba56/kSNJBCF6Jys.jpg">
+          <!-- <img class="news-card-avatar-img" src="https://pp.userapi.com/c621509/v621509307/1417d/PP_96MnQFFk.jpg"> -->
+        </div>
+        <div class="news-card-head-info">
+          <h4 class="news-card-username">Mabina Jr.</h4>
+          <h4 class="news-card-news-date">14th July 2017</h4> 
+          <h5  class="news-card-time-elapsed"> 2hrs ago</h5>
+        </div>
+      </div>
+			<h3 class="news-card-title">Five or six can win title</h3>
+			<img class="news-card-img" src="http://e2.365dm.com/17/08/16-9/30/skysports-nemanja-matic-premier-league-swansea-city-manchester-united_4078997.jpg?20170821002410">
+			<p class="news-card-p">Nemanja Matic says as many as "five or six clubs" are in with a chance of winning the Premier League title this season.</p>
+			<div class="more-dets j-left">
+				<p> <a href="#">More details ... </a> </p>
+			</div>
+		</div>
+
+
+
+    <div class="news-card">
+      <div class="news-card-head">
+        <div class="news-card-avatar">
+          <img class="news-card-avatar-img" src="https://wt-35ebebfbd89df1d57b51cb02212b9624-0.run.webtask.io/serve-photo">
+        </div>
+        <div class="news-card-head-info">
+          <h4 class="news-card-username">Sabina Sr.</h4>
+          <h4 class="news-card-news-date">15th June 2017</h4> 
+          <h5  class="news-card-time-elapsed"> 32 days ago</h5>
+        </div>
+      </div>
+      <h3 class="news-card-title">One or two or three can do it</h3>
+      <img class="news-card-img" src="http://e2.365dm.com/17/08/16-9/30/skysports-nemanja-matic-premier-league-swansea-city-manchester-united_4078997.jpg?20170821002410">
+      <p class="news-card-p">Nemanja Matic says as many as "five or six clubs" are in with a chance of winning the Premier League title this season.</p>
+      <div class="more-dets j-left">
+        <p> <a href="#">More details ... </a> </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container gray"></div>
+
+  <template id="news-template">
+    <div class="news-card">
+      <div class="news-card-head">
+        <div class="news-card-avatar">
+          <img class="news-card-avatar-img" src="">
+        </div>
+        <div class="news-card-head-info">
+          <h4 class="news-card-username">Mabina Jr.</h4>
+          <h4 class="news-card-news-date">14th July 2017</h4>
+          <h5  class="news-card-time-elapsed"> 2hrs ago</h5>
+        </div>
+      </div>
+      <h3 class="news-card-title">Five or six can win title</h3>
+      <img class="news-card-img" src="http://e2.365dm.com/17/08/16-9/30/skysports-nemanja-matic-premier-league-swansea-city-manchester-united_4078997.jpg?20170821002410">
+      <p class="news-card-p">Nemanja Matic says as many as "five or six clubs" are in with a chance of winning the Premier League title this season.</p>
+      <div class="more-dets j-left">
+        <p> <a href="#">More details ... </a> </p>
+      </div>
+    </div>
+  </template>    
+
+	<script type="text/javascript" src="idb.js"></script>
+	<script type="text/javascript">
+    function changeAvatar(newImgSrc) {
+      // body...
+      const imgSrc = newImgSrc || "https://pp.userapi.com/c625322/v625322763/4ba56/kSNJBCF6Jys.jpg";
+      document.querySelector('img[src = "https://pp.userapi.com/c625322/v625322763/4ba56/kSNJBCF6Jys.jpg"]').src = imgSrc;
+    }
+
+    const avatars = [
+      "https://pp.userapi.com/c625322/v625322763/4ba56/kSNJBCF6Jys.jpg",
+      "https://pp.userapi.com/c621509/v621509307/1417d/PP_96MnQFFk.jpg",
+      "https://avatars1.githubusercontent.com/u/19151438?v=2&s=50"
+    ];
+
+    const newsData = [{
+      postId : 112583,
+      title: "YNWA",
+      text: "When you walk through a storm, hold your head up high...",
+      photoUrl: "",
+      datetime: 1504431896261,
+      userId: 493,
+      userName: "Amani Mabina",
+      avatarUrl: avatars[0]
+    },{
+      postId : 112584,
+      title: "Hanging by a thread",
+      text: "Hello, hello, hello, my darling; have we seen the end?",
+      photoUrl: "http://e2.365dm.com/17/08/16-9/30/skysports-nemanja-matic-premier-league-swansea-city-manchester-united_4078997.jpg?20170821002410",
+      datetime: 1501362530830,
+      userId: 434,
+      userName: "Cathy Becks",
+      avatarUrl: avatars[0]
+    }]
+
+
+
+    // add news data
+    function addNews (newsData){
+      var pageContainer = document.querySelector(".container.gray");
+      if (!pageContainer.style.display) {
+        pageContainer.style.display = 'block';
+      }
+      newsData.forEach( newsItem => {
+        var newsTemplate = document.querySelector("#news-template");
+        var nTC = newsTemplate.content;
+        var newsTitle = nTC.querySelector(".news-card-title");
+        var newsText = nTC.querySelector(".news-card-p");
+        var newsImage = nTC.querySelector(".news-card-img");
+
+        var avatarImg = nTC.querySelector(".news-card-avatar-img");
+        var userName = nTC.querySelector(".news-card-username");
+        var timeElapsed = nTC.querySelector(".news-card-time-elapsed");
+        var postDate = nTC.querySelector(".news-card-news-date");
+
+        nTC.querySelector('.news-card').classList.add('js-news-card');
+        newsTitle.textContent = newsItem.title;
+        newsText.textContent = newsItem.text;
+        newsImage.src = newsItem.photoUrl;
+        avatarImg.src = newsItem.avatarUrl;
+
+        avatarImg.dataset["uid"] = newsItem.userId;
+        avatarImg.dataset["unsourced"] = true;
+
+        userName.textContent = newsItem.userName;
+        postDate.textContent = calcPostDate(newsItem.datetime);
+        timeElapsed.textContent = calcTimeElapsed(newsItem.datetime);
+        
+        pageContainer.appendChild(document.importNode(nTC, true));
+
+      });
+      insertImgSrc();
+    }
+
+    // util functions
+    function calcPostDate (datetime){
+      const d = new Date(datetime);
+      console.log("hello");
+      return d.toLocaleDateString();
+    }
+    function calcTimeElapsed (datetime){
+      const d = new Date(datetime);
+      const now = new Date();
+      const tDiff = (now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24)
+      const s = " days ago."
+      return String(Math.floor(tDiff)) + s;
+    }
+
+    // get user info
+    let userInfos = {
+      493 : {
+        name : "Amani Mabina",
+        avatar : avatars[1]
+      },
+      434 : {
+        name : "Cathy Backets",
+        avatar : avatars[2]
+      }
+    }
+
+    // update user info
+
+
+    
+    var kl = Promise.resolve();
+
+    function insertImgSrc (){
+      const imgNodes = document.querySelectorAll('img[data-uid][data-unsourced]');
+      imgNodes.forEach(imgNode => {
+        const userId = imgNode.dataset["uid"];
+        kl.then(()=> {
+          const imgSrc = userInfos[userId]["avatar"];
+          imgNode.src = imgSrc;
+          delete imgNode.dataset["unsourced"];
+          imgNode.dataset["sourced"] = true;
+        });
+      });
+    }
+
+  </script>
+</body>
+
+</html>

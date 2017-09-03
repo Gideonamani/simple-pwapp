@@ -9,6 +9,8 @@ self.addEventListener('install', function(e) {
       return cache.addAll([
         '/',
         '/index.html',
+        '/settings.html',
+        '/avatars.html',
         '/idb.js',
         '/functions.js',
         '/images/icons/home.png',
@@ -43,6 +45,13 @@ self.addEventListener('fetch', function(event) {
   if (requestUrl.href.includes(".jpg") && 
       requestUrl.href.includes("365dm")) {
     event.respondWith(servePhoto(event.request));
+    return;
+  }
+
+  // test avatar cache stratedgy
+  if (requestUrl.href.includes('webtask.io')) {
+    // event.respondWith(serveAvatar(event.request));
+    event.respondWith(serveAvatarFromNetworkFirst(event.request));
     return;
   }
 
@@ -102,4 +111,39 @@ function servePhoto(request) {
       });
     });
   });
+}
+
+function serveAvatarFromNetworkFirst(request) {
+  // When the network fetch fails, that's when we look up in cache
+  var storageUrl = request.url;
+
+  console.log("serving A from NETWORK!!", request.url);
+
+  return fetch(request).then(function(networkResponse){
+    return caches.open(contentImgsCache).then(function(cache) {
+      cache.put(storageUrl, networkResponse.clone());
+      return networkResponse;
+    })
+  }).catch(function() {
+    return caches.match(request);
+  })
+}
+
+function serveAvatar(request) {
+  // Note that this is slightly different to servePhoto!
+  var storageUrl = request.url;
+
+  console.log("serving avatars", request.url);
+
+  return caches.open(contentImgsCache).then(function(cache) {
+    return cache.match(storageUrl).then(function(response) {
+
+      var networkFetch = fetch(request).then(function(networkResponse) {
+        cache.put(storageUrl, networkResponse.clone());
+        return networkResponse;
+      });
+
+      return response || networkFetch;
+    });
+  });  
 }
